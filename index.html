@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELVIE — Jimmy Fairly</title>
+  <meta name="description" content="ELVIE by Jimmy Fairly. A retro oval silhouette in translucent honey-amber bio-acetate, with dual-dot gold rivets and five-barrel metal hinges.">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+
+  <!-- WebGL Layer -->
+  <div id="webgl-container"></div>
+  <!-- Ripple Canvas -->
+  <canvas id="ripple-canvas"></canvas>
+  <!-- Scroll Progress -->
+  <div id="progress-bar"></div>
+
+  <!-- Section Nav Dots -->
+  <nav id="section-dots" aria-label="Section navigation">
+    <div class="dot active" data-section="hero-section"       data-label="Elvie"></div>
+    <div class="dot"        data-section="specs-section"      data-label="Anatomy"></div>
+    <div class="dot"        data-section="gallery-section"    data-label="Lookbook"></div>
+    <div class="dot"        data-section="customize-section"  data-label="Customize"></div>
+    <div class="dot"        data-section="preorder-section"   data-label="Order"></div>
+  </nav>
+
+  <!-- Header -->
+  <header id="site-header">
+    <a href="#hero-section" class="brand-logo">Jimmy Fairly</a>
+
+    <nav>
+      <a href="#hero-section"      id="nav-home">Home</a>
+      <a href="#specs-section"     id="nav-specs">Anatomy</a>
+      <a href="#gallery-section"   id="nav-gallery">Lookbook</a>
+      <a href="#customize-section" id="nav-customize">Customize</a>
+    </nav>
+
+    <div class="nav-actions">
+      <button class="btn-icon" id="sound-toggle" aria-label="Toggle sound">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75V5.25L7.75 9.5H4.5v5h3.25L12 18.75z" />
+        </svg>
+      </button>
+      <button class="btn-icon" id="theme-toggle" aria-label="Toggle theme">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </button>
+      <button class="btn" id="header-reserve-btn">Reserve Pair</button>
+    </div>
+  </header>
+
+  <!-- Cart Overlay -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+
+  <!-- MAIN SCROLL CONTENT -->
+  <main id="ui-container">
+
+    <!-- §1 HERO -->
+    <section class="scroll-section" id="hero-section">
+      <div class="grid-guide" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+      <div class="section-index" aria-hidden="true">01</div>
+
+      <div class="hero-text">
+        <div class="hero-kicker"><span>L'Édition Solaire · Paris</span></div>
+
+        <h1 class="hero-headline">
+          Meet<br><em>Elvie.</em>
+        </h1>
+
+        <p class="hero-sub">
+          A retro oval silhouette.<br>Hand-sculpted in translucent honey-amber acetate.
+        </p>
+
+        <!-- Signature: material spec ticker -->
+        <div class="spec-ticker">
+          <div class="spec-ticker-dot"></div>
+          <div class="spec-ticker-track">
+            <div class="spec-ticker-inner" id="ticker-inner">
+              <span class="spec-ticker-item">Bio-Acetate · Hand-Polished 72 hrs</span>
+              <span class="spec-ticker-item">Five-Barrel Metal Hinges</span>
+              <span class="spec-ticker-item">UV400 · Category 3 Lenses</span>
+              <span class="spec-ticker-item">Dual-Dot Gold Rivet Detailing</span>
+              <span class="spec-ticker-item">Bio-Acetate · Hand-Polished 72 hrs</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-cta">
+          <button class="btn btn-primary" id="hero-explore-btn">Discover Details</button>
+          <div class="hero-scroll-hint">
+            <svg class="scroll-arrow" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v12M3 9l6 6 6-6"/>
+            </svg>
+            <span>Scroll</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §2 ANATOMY -->
+    <section class="scroll-section" id="specs-section">
+      <div class="grid-guide" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+      <div class="section-index" aria-hidden="true">02</div>
+
+      <div class="specs-panel">
+        <span class="eyebrow">Anatomy of Craft</span>
+        <h2>Handmade<br><em>Assembly.</em></h2>
+        <p class="deck">Scroll to disassemble. Each element is joined by hand for structural balance and long-term wear.</p>
+
+        <div class="anatomy-list">
+          <div class="anatomy-item">
+            <span class="anatomy-num">i</span>
+            <div>
+              <h3>Bio-Acetate Frame</h3>
+              <p>Derived from organic wood pulp and cotton seeds. Hand-polished over 72 hours for a deep, luminous gloss that deepens with wear.</p>
+            </div>
+          </div>
+          <div class="anatomy-item">
+            <span class="anatomy-num">ii</span>
+            <div>
+              <h3>Tempered UV Lenses</h3>
+              <p>Category 3 brown-tinted mineral glass with 100% UVA/UVB filtration. High optical clarity at every light angle.</p>
+            </div>
+          </div>
+          <div class="anatomy-item">
+            <span class="anatomy-num">iii</span>
+            <div>
+              <h3>Five-Barrel Hinges</h3>
+              <p>Traditional metal barrel joints locked with micro-rivets. Each arm glides with consistent, silent resistance across years of use.</p>
+            </div>
+          </div>
+          <div class="anatomy-item">
+            <span class="anatomy-num">iv</span>
+            <div>
+              <h3>Gold Rivet Detail</h3>
+              <p>Twin 18k-plated brass rivets on each end-piece — an artisanal signature that catches the light precisely as designed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §3 LOOKBOOK -->
+    <section class="scroll-section" id="gallery-section">
+      <div class="grid-guide" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+      <div class="section-index" aria-hidden="true">03</div>
+
+      <div class="gallery-header">
+        <div class="gallery-header-left">
+          <span class="eyebrow">Captured in Light</span>
+          <h2>The Elvie<br><em>Lookbook.</em></h2>
+        </div>
+        <div class="gallery-header-right">
+          <p>Shot in natural afternoon sun. No retouching on the acetate — its warmth is inherent to the material.</p>
+        </div>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-card">
+          <img src="images/glasses-linen.jpg" alt="Elvie sunglasses resting on warm linen" loading="lazy">
+          <div class="gallery-caption">
+            <span class="gallery-caption-title">On Linen</span>
+            <span class="gallery-caption-sub">Honey Tortoise</span>
+          </div>
+        </div>
+        <div class="gallery-card">
+          <img src="images/lifestyle-profile.jpg" alt="Profile portrait wearing Elvie in golden hour light" loading="lazy">
+          <div class="gallery-caption">
+            <span class="gallery-caption-title">Golden Hour</span>
+            <span class="gallery-caption-sub">L'Édition Solaire</span>
+          </div>
+        </div>
+        <div class="gallery-card">
+          <img src="images/lifestyle-close.jpg" alt="Close portrait face in warm afternoon sun" loading="lazy">
+          <div class="gallery-caption">
+            <span class="gallery-caption-title">In Warm Light</span>
+            <span class="gallery-caption-sub">Elvie, Paris</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- §4 CONFIGURATOR -->
+    <section class="scroll-section" id="customize-section">
+      <div class="grid-guide" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+      <div class="section-index" aria-hidden="true">04</div>
+
+      <div class="config-panel">
+        <span class="eyebrow">Personalize</span>
+        <h2>Material<br><em>Configurator.</em></h2>
+        <p class="deck">Select your bio-acetate colorway and lens tint. Watch the physical reflections update in real time.</p>
+
+        <div class="config-row">
+          <div class="config-label">
+            <span>Acetate Frame</span>
+            <span class="config-selected-name" id="frame-name">Honey Tortoise</span>
+          </div>
+          <div class="swatch-group" id="frame-swatches">
+            <div class="swatch active"
+                 style="background: radial-gradient(circle at 35% 35%, #e8b97a 0%, #8b5a2b 100%);"
+                 data-color="honey" data-name="Honey Tortoise" title="Honey Tortoise"></div>
+            <div class="swatch"
+                 style="background: #1a1814;"
+                 data-color="black" data-name="Midnight Onyx" title="Midnight Onyx"></div>
+            <div class="swatch"
+                 style="background: radial-gradient(circle at 40% 40%, #7a9966 0%, #3d5c2d 100%);"
+                 data-color="olive" data-name="Translucent Olive" title="Translucent Olive"></div>
+          </div>
+        </div>
+
+        <div class="config-row">
+          <div class="config-label">
+            <span>Lens Tint</span>
+            <span class="config-selected-name" id="lens-name">Warm Brown</span>
+          </div>
+          <div class="swatch-group" id="lens-swatches">
+            <div class="swatch active"
+                 style="background: #7a4a22;"
+                 data-color="brown" data-name="Warm Brown" title="Warm Brown"></div>
+            <div class="swatch"
+                 style="background: #2e5c46;"
+                 data-color="green" data-name="Bottle Green" title="Bottle Green"></div>
+            <div class="swatch"
+                 style="background: #3a6080;"
+                 data-color="blue" data-name="Ocean Blue" title="Ocean Blue"></div>
+          </div>
+        </div>
+
+        <button class="btn btn-brass" id="config-add-btn" style="margin-top: 1.5rem;">Add to Order</button>
+      </div>
+    </section>
+
+    <!-- §5 PRE-ORDER -->
+    <section class="scroll-section" id="preorder-section">
+      <div class="grid-guide" aria-hidden="true">
+        <div class="grid-line"></div><div class="grid-line"></div><div class="grid-line"></div>
+      </div>
+      <div class="section-index" aria-hidden="true">05</div>
+
+      <div class="preorder-panel">
+        <span class="eyebrow">Jimmy Fairly · Paris</span>
+        <h2>Order<br><em>Elvie.</em></h2>
+        <p class="deck">Every pair ships in a hand-sewn vegetable-tanned leather case with a microfiber cloth.</p>
+
+        <div class="price-row">
+          <span class="price-amount">149</span>
+          <span class="price-currency">USD · Free Worldwide Shipping</span>
+        </div>
+
+        <div class="preorder-includes">
+          <div class="include-item"><span>🪵</span><span>Leather Case</span></div>
+          <div class="include-item"><span>🕶</span><span>Elvie Frame</span></div>
+          <div class="include-item"><span>✦</span><span>Certificate</span></div>
+          <div class="include-item"><span>🌍</span><span>Free Shipping</span></div>
+        </div>
+
+        <button class="btn btn-primary" id="preorder-btn" style="padding: 1rem 3.5rem; font-size: 0.65rem;">Reserve My Pair</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CART DRAWER -->
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-header">
+      <div class="cart-header-text">
+        <span class="eyebrow">Your Selection</span>
+        <h2>My Order</h2>
+      </div>
+      <button class="btn-icon" id="cart-close" aria-label="Close order summary" style="font-size: 1.8rem; align-self: flex-start;">&times;</button>
+    </div>
+
+    <div class="cart-items">
+      <div class="cart-item">
+        <div class="cart-item-row">
+          <h3>ELVIE Sunglasses</h3>
+          <span class="cart-item-price">$149</span>
+        </div>
+        <p class="cart-item-detail" id="cart-item-details">Honey Tortoise / Warm Brown</p>
+      </div>
+    </div>
+
+    <div class="cart-total-section">
+      <div class="cart-total-row">
+        <span class="cart-total-label">Total</span>
+        <span class="cart-total-amount">$149</span>
+      </div>
+      <p class="cart-total-note">Includes free worldwide shipping and leather case.</p>
+      <button class="btn btn-primary" id="checkout-btn" style="width: 100%; padding: 1.1rem; display: flex; justify-content: center; font-size: 0.65rem;">Confirm Reservation</button>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+    </svg>
+    <span id="toast-message">Reservation confirmed.</span>
+  </div>
+
+  <script src="synth.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
