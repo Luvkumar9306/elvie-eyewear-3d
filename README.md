@@ -1,4 +1,4 @@
-# ELVIE — Jimmy Fairly 3D Eyewear Showcase & Customizer
+﻿# ELVIE — Jimmy Fairly 3D Eyewear Showcase & Customizer
 
 > A luxury, interactive 3D product landing page and customizer built for the retro oval silhouette **ELVIE** frames.
 
@@ -45,3 +45,15 @@ npx serve .
 ```
 
 Then visit `http://localhost:8080` in your browser.
+
+
+---
+
+## 🎬 Live Screen Recording Demo
+
+> **Watch the real-time 3D eyewear customizer & material configurator in action:**  
+> ▶️ **[Download / Watch elvie-customizer-demo.mp4](demo/elvie-customizer-demo.mp4)**
+
+<video src="demo/elvie-customizer-demo.mp4" controls="controls" width="100%" style="max-width: 800px; border-radius: 8px;">
+  Your browser does not support the video tag.
+</video>
